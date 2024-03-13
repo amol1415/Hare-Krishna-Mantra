@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hare Krishna Mantra</title>
+    <style>
+        #mantraDisplay {
+            font-size: 24px;
+            text-align: center;
+            white-space: pre-line;
+            /* Preserve line breaks */
+            margin-top: 50px;
+            width: 450px;
+            border: 2px solid grey;
+            border-radius: 13px;
+            height: 120px;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="countDisplay">Count: 0</div> <br> <br>
+    <div id="mantraDisplay"></div>
+
+
+    <script>
+        let mantras = [
+            "Hare Krishna, Hare Krishna",
+            "Krishna Krishna, Hare Hare",
+            "Hare Rama, Hare Rama",
+            "Rama Rama, Hare Hare"
+        ];
+        let count = 0;
+        let index = 0;
+
+        function displayMantraRowByRow(index, row) {
+            let mantraDisplay = document.getElementById('mantraDisplay');
+            let countDisplay = document.getElementById('countDisplay');
+
+            mantraDisplay.textContent = mantras.slice(0, index + 1).join("\n"); // Display rows up to the current index
+            countDisplay.textContent = 'Count: ' + count;
+
+            if (index < mantras.length - 1) {
+                setTimeout(() => {
+                    displayMantraRowByRow(index + 1, 0); // Display the next row
+                }, 1000); // Delay between rows (adjust as needed)
+            } else {
+                setTimeout(() => {
+                    mantraDisplay.textContent = ''; // Clear the displayed mantra
+                    count++;
+
+                    if (count < 108) {
+                        displayMantraRowByRow(0, 0); // Display the first row for the next count
+                    }
+                }, 2000); // Time interval before incrementing the count and switching to the next mantra (adjust as needed)
+            }
+        }
+
+        // Initial call to start displaying the mantra
+        displayMantraRowByRow(0, 0);
+    </script>
+
+</body>
+
+</html>
